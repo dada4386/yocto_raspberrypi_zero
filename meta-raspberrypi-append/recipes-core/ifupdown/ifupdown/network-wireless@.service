@@ -1,0 +1,14 @@
+[Unit]
+Description=Wireless network connectivity (%i)
+Wants=network.target
+Before=network.target
+BindsTo=sys-subsystem-net-devices-%i.device
+After=sys-subsystem-net-devices-%i.device
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/sbin/ifup %i
+ExecStop=/sbin/ifdown %i
+[Install]
+WantedBy=multi-user.target
+
